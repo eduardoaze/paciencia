@@ -43,3 +43,14 @@ while jogando:
             print ('\033[1;32;40m{0}.'.format (cor), carta)
         elif extrai_naipe(carta) == '♠':
             print ('\033[1;34;40m{0}.'.format (cor), carta)
+    #escolha carta
+        while len (baralho) > 1 and possui_movimentos_possiveis(baralho) != False:
+            escolha_carta = int (input ('\033[1;37;40mDigite o número da carta desejada: (1 a {0}):'.format (len(baralho))))
+#numero da carta não possível
+            while escolha_carta > len (baralho) or escolha_carta < 1:
+                escolha_carta = int (input('\033[1;37;40mDigite o número de uma carta válida: (1 a {0}):'.format (len(baralho))))
+        carta_selecionada = escolha_carta - 1
+        possiveis = lista_movimentos_possiveis(baralho, carta_selecionada)
+        baralho_escolhido = baralho [carta_selecionada]
+        while possiveis == []:
+            escolher_novamente = int (input('Essa carta não pode ser escolhida. Escolha outra: '))
