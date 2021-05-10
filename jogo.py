@@ -16,6 +16,7 @@ print ('')
 print ('Boa sorte!!')
 print ('')
 import random
+#baralho
 def cria_baralho ():
     baralho = ['A♥', 'K♥', 'Q♥', 'J♥', '9♥', '8♥', '7♥', '6♥', '5♥', '4♥','3♥', '2♥','A♠', 'K♠', 'Q♠', 'J♠','9♠', '8♠', '7♠', '6♠', '5♠', '4♠', '3♠', '2♠','A♦','K♦','Q♦', 'J♦', '9♦', '8♦', '7♦', '6♦', '5♦', '4♦', '3♦', '2♦', 'A♣', 'K♣', 'Q♣', 'J♣', '9♣', '8♣', '7♣', '6♣', '5♣', '4♣', '3♣', '2♣', '10♣', '10♦', '10♠', '10♥']
     random.shuffle (baralho)
@@ -29,6 +30,7 @@ def extrai_naipe (string):
         return '♣'
     else:
         return '♠'
+#movimentos
 def possui_movimentos_possiveis (baralho):
     naipes = []
     numeros =[]
@@ -70,6 +72,7 @@ def possui_movimentos_possiveis (baralho):
         return True
     else:
         return False
+#movimentos possiveis
 def lista_movimentos_possiveis (baralho, carta_selecionada):
     numero = []
     naipe = []
@@ -123,3 +126,5 @@ while jogando:
         carta_selecionada = escolha_carta - 1
         possiveis = lista_movimentos_possiveis(baralho, carta_selecionada)
         baralho_escolhido = baralho [carta_selecionada]
+        while possiveis == []:
+            escolher_novamente = int (input('Essa carta não pode ser escolhida'))
