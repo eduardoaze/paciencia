@@ -129,6 +129,12 @@ def lista_movimentos_possiveis (baralho, carta_selecionada):
             movimentos.append (1)
     return movimentos      
 
+def empilha(movimentos, i_ori, i_des):
+    y = movimentos[i_ori]
+    movimentos.remove(y)
+    movimentos.remove(movimentos[i_des])
+    movimentos.insert(i_des, y)
+    return movimentos
 
 #colocar todas as funções
 #condição
@@ -146,55 +152,57 @@ while jogando:
             print ('\033[1;32;40m{0}.'.format (cor), carta)
         elif extrai_naipe(carta) == '♠':
             print ('\033[1;34;40m{0}.'.format (cor), carta)
-    #escolha carta
-        while len (baralho) > 1 and possui_movimentos_possiveis(baralho) != False:
-            escolha_carta = int (input ('\033[1;37;40mDigite o número da carta desejada: (1 a {0}):'.format (len(baralho))))
+#escolha carta
+    while len (baralho) > 1 and possui_movimentos_possiveis(baralho) != False:
+        escolha_carta = int (input ('\033[1;37;40mDigite o número da carta desejada: (1 a {0}):'.format (len(baralho))))
 #numero da carta não possível
-            while escolha_carta > len (baralho) or escolha_carta < 1:
-                escolha_carta = int (input('\033[1;37;40mDigite o número de uma carta válida: (1 a {0}):'.format (len(baralho))))
-            carta_selecionada = escolha_carta - 1
-            possiveis = lista_movimentos_possiveis(baralho, carta_selecionada)
-            baralho_escolhido = baralho [carta_selecionada]
-            while possiveis == []:
-                escolher_novamente = int (input('Essa carta não pode ser escolhida. Escolha outra: '))
-                possivel_2 = escolher_novamente - 1 
-                possiveis= lista_movimentos_possiveis (baralho, possivel_2)
-            if possiveis== [1]:
-                Empilhar(baralho,carta_selecionada, carta_selecionada-1)
-                for i, carta in enumerate(baralho):
-                    cor = i + 1
-                    if extrai_naipe(carta) == '♥':
-                        print ('\033[1;31;40m{0}.'.format (cor), carta)
-                    elif extrai_naipe(carta) == '♦':
-                        print ('\033[1;35;40m{0}.'.format (cor), carta)
-                    elif extrai_naipe(carta) == '♣':
-                        print ('\033[1;32;40m{0}.'.format (cor), carta)
-                    elif extrai_naipe(carta) == '♠':
-                        print ('\033[1;34;40m{0}.'.format (cor), carta)
-            elif possiveis == [3]:
-                Empilhar (baralho, carta_selecionada,carta_selecionada-3)
-                for i, carta in enumerate(baralho):
-                    cor = i + 1
-                    if extrai_naipe(carta) == '♥':
-                        print ('\033[1;31;40m{0}.'.format (cor), carta)
-                    elif extrai_naipe(carta) == '♦':
-                        print ('\033[1;35;40m{0}.'.format (cor), carta)
-                    elif extrai_naipe(carta) == '♣':
-                        print ('\033[1;32;40m{0}.'.format (cor), carta)
-                    elif extrai_naipe(carta) == '♠':
-                        print ('\033[1;34;40m{0}.'.format (cor), carta)
-        if len (baralho)==1:
-            print ("Você conseguiu!!Parabéns!!")
-        elif possui_movimentos_possiveis (baralho)== False:
-            print ("Não foi desta vez...")
-        jogar_novamente= input ("Deseja jogar novamente? (Sim ou Não): ")
-        while jogar_novamente != "Sim" and jogar_novamente != "Não" :
-            jogar_novamente = input ("resposta indesejada")
-        if jogar_novamente == "Sim":
-            jogando= True
-        elif jogar_novamente == "Não":
-            print ("Obrigado por jogar!")
-            jogando= False 
+        while escolha_carta > len (baralho) or escolha_carta < 1:
+            escolha_carta = int (input('\033[1;37;40mDigite o número de uma carta válida: (1 a {0}):'.format (len(baralho))))
+        carta_selecionada = escolha_carta - 1
+        possiveis = lista_movimentos_possiveis(baralho, carta_selecionada)
+        baralho_escolhido = baralho [carta_selecionada]
+        while possiveis == []:
+            escolher_novamente = int (input('Essa carta não pode ser escolhida. Escolha outra: '))
+            possivel_2 = escolher_novamente - 1 
+            possiveis= lista_movimentos_possiveis (baralho, possivel_2)
+        if possiveis== [1,3]:
+            empilha(baralho,carta_selecionada, carta_selecionada-1)
+            for i, carta in enumerate(baralho):
+                cor = i + 1
+                if extrai_naipe(carta) == '♥':
+                    print ('\033[1;31;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♦':
+                    print ('\033[1;35;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♣':
+                    print ('\033[1;32;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♠':
+                    print ('\033[1;34;40m{0}.'.format (cor), carta)
+        
+        elif escolha_carta == carta_selecionada - 2:
+            empilha (baralho, carta_selecionada, carta_selecionada - 3)
+            for i, carta in enumerate(baralho):
+                cor = i + 1
+                if extrai_naipe(carta) == '♥':
+                    print ('\033[1;31;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♦':
+                    print ('\033[1;35;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♣':
+                    print ('\033[1;32;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♠':
+                    print ('\033[1;34;40m{0}.'.format (cor), carta)
+    
+    if len (baralho)==1:
+      print ("Você conseguiu!!Parabéns!!")
+    elif possui_movimentos_possiveis (baralho)== False:
+      print ("Não foi desta vez...")
+      jogar_novamente= input ("Deseja jogar novamente? (Sim ou Não): ")
+    while jogar_novamente != "Sim" and jogar_novamente != "Não" :
+      jogar_novamente = input ("resposta indesejada")
+    if jogar_novamente == "Sim":
+      jogando= True
+    elif jogar_novamente == "Não":
+      print ("Obrigado por jogar!")
+      jogando= False
 
 
 
