@@ -190,6 +190,7 @@ while jogando:
                     print ('\033[1;34;40m{0}.'.format (cor), carta)
         elif possiveis == [1,3]:
           escolha_carta = int (input ('Escolha uma carta para empilhar sobre: '))
+          empilha(baralho, carta_selecionada, escolha_carta)
         elif escolha_carta == carta_selecionada - 2:
             empilha (baralho, carta_selecionada, carta_selecionada - 3)
             for i, carta in enumerate(baralho):
@@ -215,6 +216,3 @@ while jogando:
     elif jogar_novamente == "Não":
       print ("Obrigado por jogar!")
       jogando= False 
-      
-      
-      
