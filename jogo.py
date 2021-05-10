@@ -13,6 +13,8 @@ print ('2. As duas cartas possuem o mesmo naipe.')
 print('')
 print('Desde que alguma das condições acima seja satisfeita, qualquer carta pode ser movimentada.') 
 print ('')
+print ('Boa sorte!!')
+print ('')
 import random
 def cria_baralho ():
     baralho = ['A♥', 'K♥', 'Q♥', 'J♥', '9♥', '8♥', '7♥', '6♥', '5♥', '4♥','3♥', '2♥','A♠', 'K♠', 'Q♠', 'J♠','9♠', '8♠', '7♠', '6♠', '5♠', '4♠', '3♠', '2♠','A♦','K♦','Q♦', 'J♦', '9♦', '8♦', '7♦', '6♦', '5♦', '4♦', '3♦', '2♦', 'A♣', 'K♣', 'Q♣', 'J♣', '9♣', '8♣', '7♣', '6♣', '5♣', '4♣', '3♣', '2♣', '10♣', '10♦', '10♠', '10♥']
@@ -68,6 +70,34 @@ def possui_movimentos_possiveis (baralho):
         return True
     else:
         return False
+def lista_movimentos_possiveis (baralho, carta_selecionada):
+    numero = []
+    naipe = []
+    for carta in baralho:
+        if len(carta) == 2:
+            numero.append (carta [0])
+            naipe.append (carta [1])
+        else:
+            numero.append (10)
+            naipe.append (carta [2])
+    movimentos = []
+    if carta_selecionada == 0:
+        return []
+    elif carta_selecionada >= 3:
+            if naipe[carta_selecionada] == naipe [carta_selecionada - 1 ] :
+                movimentos.append (1)
+            if naipe [carta_selecionada] == naipe [carta_selecionada - 3]:
+                movimentos.append (3)
+            if numero [carta_selecionada] == numero [carta_selecionada - 1]:
+                movimentos.append (1)
+            if numero [carta_selecionada] == numero [carta_selecionada -3]:     
+                movimentos.append (3)
+    else:
+        if naipe[carta_selecionada] == naipe [carta_selecionada - 1 ] :
+            movimentos.append (1)
+        if numero [carta_selecionada] == numero [carta_selecionada - 1]:
+            movimentos.append (1)
+    return movimentos
 #colocar todas as funções
 #condição
 jogando = True
@@ -84,7 +114,12 @@ while jogando:
             print ('\033[1;32;40m{0}.'.format (cor), carta)
         elif extrai_naipe(carta) == '♠':
             print ('\033[1;34;40m{0}.'.format (cor), carta)
-        jogando = False
+#escolha carta   
         while len (baralho) > 1 and possui_movimentos_possiveis(baralho) != False:
             escolha_carta = int (input ('\033[1;37;40mDigite o número da carta desejada: (1 a {0}):'.format (len(baralho))))
-        z = escolha_carta - 1
+#numero da carta não possível
+            while escolha_carta > len (baralho) or escolha_carta < 1:
+                escolha_carta = int (input('\033[1;37;40mDigite o número de uma carta válida: (1 a {0}):'.format (len(baralho))))
+        carta_selecionada = escolha_carta - 1
+        possiveis = lista_movimentos_possiveis(baralho, carta_selecionada)
+        baralho_escolhido = baralho [carta_selecionada]
