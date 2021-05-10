@@ -36,10 +36,10 @@ while jogando:
     for i, carta in enumerate(baralho):
         cor = i + 1
         if extrai_naipe(carta) == '♥':
-            print ('/033[1;31;40m{0}.'.format (cor), carta)
+            print ('\033[1;31;40m{0}.'.format (cor), carta)
         elif extrai_naipe(carta) == '♦':
-            print ('/033[1;35;40m{0}.'.format (cor), carta)
+            print ('\033[1;35;40m{0}.'.format (cor), carta)
         elif extrai_naipe(carta) == '♣':
-            print ('/033[1;32;40m{0}.'.format (cor), carta)
+            print ('\033[1;32;40m{0}.'.format (cor), carta)
         elif extrai_naipe(carta) == '♠':
-            print ('/033[1;34;40m{0}.'.format (cor), carta)
+            print ('\033[1;34;40m{0}.'.format (cor), carta)
