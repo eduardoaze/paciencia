@@ -28,9 +28,11 @@ def extrai_naipe (string):
     else:
         return '♠'
 #colocar todas as funções
+#condição
 jogando = True
 while jogando:
     baralho = cria_baralho()
+#cores
     for i, carta in enumerate(baralho):
         cor = i + 1
         if extrai_naipe(carta) == '♥':
