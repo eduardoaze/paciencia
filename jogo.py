@@ -191,6 +191,16 @@ while jogando:
         elif possiveis == [1,3]:
           escolha_carta = int (input ('Escolha uma carta para empilhar sobre: '))
           empilha(baralho, carta_selecionada, escolha_carta)
+          for i, carta in enumerate(baralho):
+                cor = i + 1
+                if extrai_naipe(carta) == '♥':
+                    print ('\033[1;31;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♦':
+                    print ('\033[1;35;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♣':
+                    print ('\033[1;32;40m{0}.'.format (cor), carta)
+                elif extrai_naipe(carta) == '♠':
+                    print ('\033[1;34;40m{0}.'.format (cor), carta)
         elif escolha_carta == carta_selecionada - 2:
             empilha (baralho, carta_selecionada, carta_selecionada - 3)
             for i, carta in enumerate(baralho):
