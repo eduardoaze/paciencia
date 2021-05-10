@@ -13,4 +13,31 @@ print ('2. As duas cartas possuem o mesmo naipe.')
 print('')
 print('Desde que alguma das condições acima seja satisfeita, qualquer carta pode ser movimentada.') 
 print ('')
-print ('Aperte [Enter] para iniciar o jogo...')
+import random
+def cria_baralho ():
+    baralho = ['A♥', 'K♥', 'Q♥', 'J♥', '9♥', '8♥', '7♥', '6♥', '5♥', '4♥','3♥', '2♥','A♠', 'K♠', 'Q♠', 'J♠','9♠', '8♠', '7♠', '6♠', '5♠', '4♠', '3♠', '2♠','A♦','K♦','Q♦', 'J♦', '9♦', '8♦', '7♦', '6♦', '5♦', '4♦', '3♦', '2♦', 'A♣', 'K♣', 'Q♣', 'J♣', '9♣', '8♣', '7♣', '6♣', '5♣', '4♣', '3♣', '2♣', '10♣', '10♦', '10♠', '10♥']
+    random.shuffle (baralho)
+    return baralho
+def extrai_naipe (string):
+    if string [len(string) - 1] == '♦':
+        return '♦'
+    if string [len(string) - 1] == '♥':
+        return '♥'
+    if string [len(string) - 1] == '♣':
+        return '♣'
+    else:
+        return '♠'
+#colocar todas as funções
+jogando = True
+while jogando:
+    baralho = cria_baralho()
+    for i, carta in enumerate(baralho):
+        cor = i + 1
+        if extrai_naipe(carta) == '♥':
+            print ('/033[1;31;40m{0}.'.format (cor), carta)
+        elif extrai_naipe(carta) == '♦':
+            print ('/033[1;35;40m{0}.'.format (cor), carta)
+        elif extrai_naipe(carta) == '♣':
+            print ('/033[1;32;40m{0}.'.format (cor), carta)
+        elif extrai_naipe(carta) == '♠':
+            print ('/033[1;34;40m{0}.'.format (cor), carta)
